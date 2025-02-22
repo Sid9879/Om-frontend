@@ -24,7 +24,7 @@ const [getAllPost, setgetAllPost] = useState([]);
     const getAll = async()=>{
      try {
       setloading(true)
-        let res = await axios.get('http://localhost:8090/posts/getAll')
+        let res = await axios.get('https://om-backend.onrender.com/posts/getAll')
         let data = res.data;
         // console.log(data)
         settotalPage(data.totalPage)
@@ -57,7 +57,7 @@ const [getAllPost, setgetAllPost] = useState([]);
 
 const handleDelete =async(ele)=>{
   try {
-    let res = await axios.delete(`http://localhost:8090/posts/delete/${ele._id}`,{
+    let res = await axios.delete(`https://om-backend.onrender.com/posts/delete/${ele._id}`,{
       headers:{
         'Authorization':userStore.token
       }
@@ -79,7 +79,7 @@ const showModal = () => {
 };
 const handleOk = async() => {
   try {
-    const updateRes = await axios.put(`http://localhost:8090/posts/update/${currentDetails._id}`,updatedDetails,{
+    const updateRes = await axios.put(`https://om-backend.onrender.com/posts/update/${currentDetails._id}`,updatedDetails,{
       headers:{
         'Authorization':userStore.token
       }
