@@ -5,19 +5,18 @@ import axios from 'axios'
 
 const ViewCart = () => {
  const userStore = useSelector((state)=>state.user)
-//  console.log(userStore)
+
 let token = userStore.token;
-// console.log(token)
+
  const [useritems, setuseritems] = useState([]);
-//  console.log(useritems)
 const cart = async()=>{
-let res = await axios.get(`http://localhost:8090/carts/getcartItems`,{
+let res = await axios.get(`https://om-backend.onrender.com/carts/getcartItems`,{
   headers:{
     'Authorization':userStore.token
   }
 })
 let data = res.data;
-// console.log(data)
+
 setuseritems(data.cartItem);
 }  
 useEffect(()=>{
@@ -36,14 +35,12 @@ const handleAddCart = async(obj)=>{
     quantity: 1, 
     total: obj.price * 1
   };
-  // console.log(obj)
-
-  // console.log("Add Cart Data:", addCartData);
+ 
 
   try {
     
     const res = await axios.post(
-      `http://localhost:8090/carts/addCart/${obj.productId._id}`,
+      `https://om-backend.onrender.com/carts/addCart/${obj.productId._id}`,
       addCartData, 
       {
         headers: {
@@ -52,7 +49,7 @@ const handleAddCart = async(obj)=>{
       }
     );
 
-    // console.log("Response:", res.data);
+   
     if(res.data.success){
       cart()
     }
@@ -63,12 +60,11 @@ const handleAddCart = async(obj)=>{
 
 const handleUpdateCart = async(obj,index)=>{
   try {
-    let res1 = await axios.put(`http://localhost:8090/carts/update/${obj.productId._id}`,{quantity:obj.quantity},{
+    let res1 = await axios.put(`https://om-backend.onrender.com/carts/update/${obj.productId._id}`,{quantity:obj.quantity},{
       headers:{
         Authorization:userStore.token
       }
     })
-    // console.log(res1.data)
     if(res1.data.success){
       cart()
     }
@@ -79,12 +75,11 @@ const handleUpdateCart = async(obj,index)=>{
 
 const deleteCart = async(obj)=>{
   try {
-    let res = await axios.delete(`http://localhost:8090/carts/delete/${obj.productId._id}`,{
+    let res = await axios.delete(`https://om-backend.onrender.com/carts/delete/${obj.productId._id}`,{
       headers:{
         'Authorization':userStore.token
       }
     })
-    // console.log(res.data)
     if(res.data.success){
       cart()
     }

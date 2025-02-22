@@ -12,19 +12,19 @@ import {useSelector} from 'react-redux'
 const Pesticide = () => {
   const userStore = useSelector((state) => state.user);
    const [totalPage, settotalPage] = useState(0);
-    // console.log(totalPage)
+    
       const [page, setpage] = useState(1);
-      // console.log("page = ", page)
+     
       let limit = 2
         const [loading, setloading] = useState(false);
   const [PesticideDetails, setPesticideDetails] = useState([]);
-// console.log(PesticideDetails)
+
   const getPesticide = async () => {
     try {
       setloading(true)
-      let res = await axios.get('http://localhost:8090/posts/getPesticides');
+      let res = await axios.get('https://om-backend.onrender.com/posts/getPesticides');
       let data = res.data;
-      // console.log(data); 
+     
       settotalPage(data.totalPage)
       setPesticideDetails(data.Pesticides)
       setloading(false)
@@ -56,7 +56,7 @@ const fetchMoreData = ()=>{
     try {
       const data = await handleAddCart(obj, userStore.token);
       if (data.success) {
-        // console.log("Item added to cart:", data);
+        
       }
     } catch (error) {
       console.error("Error adding item to cart:", error);

@@ -31,10 +31,10 @@ let navigate = useNavigate();
     address:addressRef.current.value,
     password:passwordRef.current.value
 }
-// console.log(obj);
+
 try {
-    let res = await axios.post('http://localhost:8090/users/create', obj);
-    // console.log(res); 
+    let res = await axios.post('https://om-backend.onrender.com/users/create', obj);
+    
 
     name:nameRef.current.value=""
     email:emailRef.current.value=""
@@ -70,13 +70,13 @@ try {
     password:loginpasswordRef.current.value,
     phoneNumber:loginInputRef.current.value
   }
-  console.log(obj);
+  
 
  try {
-  let res = await axios.post('http://localhost:8090/users/login',obj)
-  console.log(res)
+  let res = await axios.post('https://om-backend.onrender.com/users/login',obj)
+
   let data = res.data;
-  console.log(data)
+ 
   let status = res.status;
   if(status===200){
     navigate('/')

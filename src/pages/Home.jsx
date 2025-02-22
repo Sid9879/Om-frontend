@@ -7,7 +7,7 @@ const Home = () => {
   const userStore = useSelector((state)=>state.user);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Function to handle scroll event
+ 
   const handleScroll = () => {
     if (window.scrollY > 200) {
       setIsVisible(true); // Show the button if scrolled 200px down

@@ -61,7 +61,7 @@ const handleInput =(e)=>{
 const addressUpdate = async(e)=>{
   e.preventDefault();
   try {
-    let res = await axios.put('http://localhost:8090/carts/updateadd',{address:formData},{
+    let res = await axios.put('https://om-backend.onrender.com/carts/updateadd',{address:formData},{
       headers:{
         Authorization: userStore.token,
       }
@@ -75,7 +75,7 @@ const [getaddress, setgetaddress] = useState([]);
 console.log(getaddress)
 const getCart = async()=>{
 try {
-  let res = await axios.get(`http://localhost:8090/carts/getcartItems`,{
+  let res = await axios.get(`https://om-backend.onrender.com/carts/getcartItems`,{
     headers:{
       'Authorization':userStore.token
     }

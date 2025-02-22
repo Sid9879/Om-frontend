@@ -8,7 +8,6 @@ const ViewDetails = () => {
   const navigate = useNavigate()
     let location = useLocation();
     let state = location.state;
-    console.log('State:', state); // Debug the state structure
 
     const [cartDetails, setcartDetails] = useState();
    

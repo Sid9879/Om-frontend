@@ -8,7 +8,6 @@ import axios from 'axios';
 
 export default function Navbar() {
   const userStore = useSelector((state)=>state.user)
-  // console.log(userStore)
   let dispatch = useDispatch()
 
   let login = userStore.token
@@ -36,15 +35,13 @@ const [products, setproducts] = useState(false);
 
 
   const [useritems, setuseritems] = useState([]);
-  // console.log(useritems)
  const cart = async()=>{
-   let res = await axios.get(`http://localhost:8090/carts/getcartItems`,{
+   let res = await axios.get(`https://om-backend.onrender.com/carts/getcartItems`,{
      headers:{
        'Authorization':userStore.token
      }
    })
    let data = res.data;
-  //  console.log(data)
    setuseritems(data.cartItem[0].items);
    }  
    useEffect(()=>{

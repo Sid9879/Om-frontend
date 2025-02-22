@@ -11,23 +11,23 @@ import { useSelector } from 'react-redux';
 const Seed = () => {
   const userStore = useSelector((state)=>state.user)
   const [totalPage, settotalPage] = useState(0);
-  // console.log(totalPage)
+  
     const [page, setpage] = useState(1);
-    // console.log("page = ", page)
+    
     let limit = 2
   const [seedDetails, setseed] = useState([]);
-  // console.log(seedDetails)
+  
   const [loading, setloading] = useState(false);
   const getSeed = async () => {
     try {
       setloading(true)
-      let res = await axios.get(`http://localhost:8090/posts/getSeed?limit=${limit}&page=${page}`);
+      let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
 
       let data = res.data;
-      // console.log(data); 
+      
       settotalPage(data.totalPage)
       setseed(data.seeds)
-      // setseed((prev)=>[...prev,...data.seeds])
+      
       setloading(false)
     } catch (error) {
       console.error('Error fetching seeds:', error);
@@ -52,8 +52,7 @@ const Seed = () => {
     autoplaySpeed: 3000,
   };
 
-  // const [cartQunatity, setcartQunatity] = useState();
-  // console.log(cartQunatity)
+ 
 
 const handleAddCart = async(obj)=>{
   const addCartData = {
@@ -63,14 +62,14 @@ const handleAddCart = async(obj)=>{
     quantity: 1, 
     total: obj.price * obj.quantity
   };
-  // console.log(obj)
+  
 
   console.log("Add Cart Data:", addCartData);
 
   try {
     
     const res = await axios.post(
-      `http://localhost:8090/carts/addCart/${obj._id}`,
+      `https://om-backend.onrender.com/carts/addCart/${obj._id}`,
       addCartData, 
       {
         headers: {
@@ -79,9 +78,9 @@ const handleAddCart = async(obj)=>{
       }
     );
 
-    // console.log("Response:", res.data);
+ 
     if(data.success){
-      // setcartQunatity(data.data)
+      
     }
   } catch (error) {
     // console.error("Error adding to cart:");

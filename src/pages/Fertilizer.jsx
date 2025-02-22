@@ -11,17 +11,17 @@ import { useSelector } from 'react-redux';
 const Fertilizer = () => {
   const userStore = useSelector((state) => state.user);
    const [totalPage, settotalPage] = useState(0);
-    // console.log(totalPage)
+  
       const [page, setpage] = useState(1);
-      // console.log("page = ", page)
+     
       let limit = 2
         const [loading, setloading] = useState(false);
   const [fertilizesDetails, setfertilizesDetails] = useState([]);
-// console.log(fertilizesDetails)
+
   const getfertilizers = async () => {
     try {
       setloading(true)
-      let res = await axios.get('http://localhost:8090/posts/getfertilizers');
+      let res = await axios.get('https://om-backend.onrender.com/posts/getfertilizers');
       let data = res.data;
       // console.log(data); 
       settotalPage(data.totalPage)
@@ -55,7 +55,7 @@ const fetchMoreData = ()=>{
     try {
       const data = await handleAddCart(obj, userStore.token);
       if (data.success) {
-        // console.log("Item added to cart:", data);
+        
       }
     } catch (error) {
       console.error("Error adding item to cart:", error);

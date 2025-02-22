@@ -11,22 +11,18 @@ import { toast } from "react-toastify";
 
 const GetallPost = () => {
   const userStore = useSelector((state)=>state.user)
-  // console.log(userStore)
   const [totalPage, settotalPage] = useState(0);
-    // console.log(totalPage)
       const [page, setpage] = useState(1);
-      // console.log("page = ", page)
       let limit = 2
         const [loading, setloading] = useState(false);
 const [getAllPost, setgetAllPost] = useState([]);
-// console.log(getAllPost)
 
     const getAll = async()=>{
      try {
       setloading(true)
         let res = await axios.get('https://om-backend.onrender.com/posts/getAll')
         let data = res.data;
-        // console.log(data)
+       
         settotalPage(data.totalPage)
         setgetAllPost((prev) => {
           const newPosts = data.post.filter((post) => !prev.some((p) => p._id === post._id));
@@ -62,7 +58,7 @@ const handleDelete =async(ele)=>{
         'Authorization':userStore.token
       }
     })
-    // console.log(res.data)
+    
     let data = res.data;
     if(data.success){
          getAll()
@@ -73,7 +69,7 @@ const handleDelete =async(ele)=>{
 }
 const [isModalOpen, setIsModalOpen] = useState(false);
 const [currentDetails, setcurrentDetails] = useState('');
-// console.log(currentDetails)
+
 const showModal = () => {
   setIsModalOpen(true);
 };
@@ -84,7 +80,7 @@ const handleOk = async() => {
         'Authorization':userStore.token
       }
     })
-    // console.log(updateRes)
+   
     let data = updateRes.data
     if(updateRes.status===200){
       getAll()
@@ -114,7 +110,7 @@ const [updatedDetails, setupdatedDetails] = useState({
   category:"",
   description:"",
 });
-// console.log(updatedDetails)
+
 
 const handleUpdate = (ele)=>{
    setcurrentDetails(ele)
@@ -127,7 +123,7 @@ const handleUpdate = (ele)=>{
    })
 
    let value = e.target.current.value;
-  //  console.log(value)
+  
 }
 
 // useEffect(() => {

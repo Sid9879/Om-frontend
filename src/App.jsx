@@ -29,7 +29,7 @@ function App() {
   let login = userStore.login;
 
   const getUserDetails = async()=>{
-    let res = await axios.get('http://localhost:8090/users/getUser',{
+    let res = await axios.get('https://om-backend.onrender.com/users/getUser',{
       headers:{
         'Authorization':userStore.token      }
     })

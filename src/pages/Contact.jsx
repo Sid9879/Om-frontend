@@ -1,7 +1,7 @@
 import React from "react";
 
 const Contact = () => {
-  // Dynamic contact details
+  
   const contactInfo = {
     address: "Gorakhpur 273001, Uttar Pradesh, India",
     phone: "+91 1234567890",

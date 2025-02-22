@@ -26,14 +26,14 @@ const CreatePost = () => {
     const handleInputChanger = (e)=>{
       let value = e.target.value
       let name = e.target.name
-      // console.log(value,name)
+      
       setformDetails({...formDetails,[name]:value})
       }
       const handleFileChanger = (e)=>{
         let files = e.target.files
-        // console.log(file)
+       
         let filesArr = [...files] 
-        // console.log(filesArr)
+     
         setformDetails({...formDetails,image:filesArr})
         }
         const handleSubmit = async ()=>{
@@ -48,7 +48,7 @@ const CreatePost = () => {
         })
         
         let StringArr = await Promise.all(arr).then((ans)=>ans)
-        // console.log(StringArr) //[string,string] data
+       
         
         let finalArr = StringArr.map((item)=>{
           let obj = {};
@@ -57,7 +57,7 @@ const CreatePost = () => {
           return obj
         })
         
-        // console.log(finalArr)
+      
         
         let finalObj = {
           title:formDetails.title,
@@ -68,10 +68,10 @@ const CreatePost = () => {
           image:finalArr,
           // file:finalArr
         }
-        // console.log(finalArr)
+      
       try {
           
-        let res = await axios.post('http://localhost:8090/posts/creates',finalObj,{
+        let res = await axios.post('https://om-backend.onrender.com/posts/creates',finalObj,{
           headers:{
             'Authorization':userStore.token
           }
