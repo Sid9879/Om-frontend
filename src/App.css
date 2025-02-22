@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.mylists {
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    
+  }
+.mylists:hover{
+    transform: translateX(7px);
+    transition: 1s;
+   
+}
