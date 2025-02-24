@@ -23,7 +23,6 @@ const Fertilizer = () => {
       setloading(true)
       let res = await axios.get('https://om-backend.onrender.com/posts/getfertilizers');
       let data = res.data;
-      // console.log(data); 
       settotalPage(data.totalPage)
       setfertilizesDetails(data.fertilizers)
       setloading(false)
