@@ -24,9 +24,12 @@ const Seed = () => {
       let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
 
       let data = res.data;
+
       
       settotalPage(data.totalPage)
       setseed(data.seeds)
+      // setseed(prev => [...prev, ...data.seeds]);
+
       
       setloading(false)
     } catch (error) {
@@ -40,8 +43,11 @@ const Seed = () => {
 
   const fetchMoreData = ()=>{
     setpage(page+1)
+    // setpage(prev => prev + 1);
     getSeed()
 }
+
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -79,9 +85,7 @@ const handleAddCart = async(obj)=>{
     );
 
  
-    if(data.success){
-      
-    }
+   
   } catch (error) {
     // console.error("Error adding to cart:");
   }
@@ -89,11 +93,11 @@ const handleAddCart = async(obj)=>{
 
 useEffect(() => {
   getSeed(); 
-  const interval = setInterval(() => {
-    getSeed(); // Fetch updated posts
-  }, 5 * 60 * 60 * 1000);
+  // const interval = setInterval(() => {
+  //   getSeed(); // Fetch updated posts
+  // }, 5 * 60 * 60 * 1000);
 
-  return () => clearInterval(interval); // Cleanup the interval on component unmount
+  // return () => clearInterval(interval); // Cleanup the interval on component unmount
 }, []);
 
   return (

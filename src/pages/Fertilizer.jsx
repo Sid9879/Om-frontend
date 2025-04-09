@@ -27,7 +27,7 @@ const Fertilizer = () => {
       setfertilizesDetails(data.fertilizers)
       setloading(false)
     } catch (error) {
-      console.error('Error fetching seeds:', error);
+      console.error('Error fetching fertilizer:', error);
     }
   };
 

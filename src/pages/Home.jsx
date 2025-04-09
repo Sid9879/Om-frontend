@@ -34,7 +34,7 @@ const Home = () => {
 
  
   return (
-    <div className=' flex flex-col gap-8 bg-black'>
+    <div className=' flex flex-col gap-8 bg-white'>
      <Seed/>
   <Pesticide/>
    <Fertilizer/>
