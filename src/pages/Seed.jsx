@@ -122,7 +122,7 @@ useEffect(() => {
   
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {seedDetails.map((ele, index) => (
-        <div key={index} className="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl border border-red-500">
+        <div key={index} className="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl border border-red-500 h-[65vh]">
           {ele.image.length > 1 ? (
               <Slider {...sliderSettings}>
                 {ele.image.map((obj, i) => (
@@ -150,7 +150,7 @@ useEffect(() => {
               <p className="text-base font-medium">₹{ele.price}</p>
             </div>
             <p className="text-sm text-gray-700 opacity-75">
-              Description:-{ele.description}
+              Description:-{ele.description?.slice(0, 100)}...
             </p>
             <p className="text-sm text-gray-700 opacity-75">
               {ele?.size}
