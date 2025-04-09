@@ -7,6 +7,8 @@ import "../App.css";
 import axios from 'axios';
 
 export default function Navbar() {
+  const [searchUser, setSearchUser] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const userStore = useSelector((state)=>state.user)
   let dispatch = useDispatch()
 
@@ -56,6 +58,24 @@ const [products, setproducts] = useState(false);
     }, 2000);
     return () => clearInterval(interval);
   }, [userStore.token]);
+
+  const handleSearchChange = async (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+
+    if (!value.trim()) {
+      setSearchUser([]);
+      return;
+    }
+
+    try {
+      const res = await axios.get(`https://om-backend.onrender.com/posts/search?q=${value}`);
+      setSearchUser(res.data.products || []);
+      console.log(res.data)
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
+  };
   return (
     <nav id="navbar" className="bg-gray-800 text-white shadow-md fixed w-full z-50 ">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
@@ -68,7 +88,8 @@ const [products, setproducts] = useState(false);
         <div className="hidden sm:flex   md:flex w-[300px] ">
           <input
             type="text"
-            placeholder="Search..."
+            value={searchValue}
+            onChange={handleSearchChange}
             className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
           />
 
@@ -206,7 +227,27 @@ const [products, setproducts] = useState(false);
             </li>
           </ul>
         </div>
+        
       )}
+      {searchUser.length > 0 && (
+  <div className="absolute top-full left-0 mt-2 w-full bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
+    {searchUser.map((product, i) => (
+      <Link
+        key={i}
+        to="/viewdetails"
+        state={product} // pass the product details to the next page
+        className="block px-4 py-2 text-black hover:bg-gray-100 cursor-pointer"
+        onClick={() => {
+          setSearchValue("");
+          setSearchUser([]);
+        }}
+      >
+        {product.title}
+      </Link>
+    ))}
+  </div>
+)}
+
     </nav>
   );
 }
