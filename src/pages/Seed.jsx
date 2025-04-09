@@ -21,7 +21,9 @@ const Seed = () => {
   const getSeed = async () => {
     try {
       setloading(true)
-      let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
+      // let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
+      let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed`);
+
 
       let data = res.data;
 
