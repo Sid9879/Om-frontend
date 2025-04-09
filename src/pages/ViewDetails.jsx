@@ -32,7 +32,7 @@ const ViewDetails = () => {
      }
 
   return (
-    <div>
+    <div className='overflow-hidden'>
       <div className="container sm:px-6 lg:px-8 w-screen my-10">
         {cartDetails ? (
           <div className="px-3 mx-auto relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl w-[350px] border border-green-500 py-3">
