@@ -21,6 +21,7 @@ import Contact from './pages/Contact'
 import About from './pages/About'
 import LiveLocation from './pages/LiveLocation'
 import PageNotFound from './pages/PageNotFound'
+import ProductDetails from './components/ProductDetails'
 
 function App() {
   let dispatch = useDispatch();
@@ -65,6 +66,8 @@ function App() {
       <Route path='/about'  element={login===true?<About/> : <Navigate to ='/login'/>}/>
       <Route path='/location'  element={<LiveLocation/>}/>
       <Route path='/*' element={login===true?<PageNotFound/> : <Navigate to ='/login'/>}/>
+      <Route path='/productDetail'  element={login===true?<ProductDetails/> : <Navigate to ='/login'/>}/>
+
 
 
     </Routes>

@@ -229,13 +229,13 @@ const [products, setproducts] = useState(false);
         </div>
         
       )}
-      {searchUser.length > 0 && (
+     {searchValue.trim() !== "" && searchUser.length > 0 && (
   <div className="absolute top-full left-0 mt-2 w-full bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
     {searchUser.map((product, i) => (
       <Link
         key={i}
-        to="/viewdetails"
-        state={product} // pass the product details to the next page
+        to="/productDetail"
+        state={product}
         className="block px-4 py-2 text-black hover:bg-gray-100 cursor-pointer"
         onClick={() => {
           setSearchValue("");
@@ -247,6 +247,7 @@ const [products, setproducts] = useState(false);
     ))}
   </div>
 )}
+
 
     </nav>
   );
