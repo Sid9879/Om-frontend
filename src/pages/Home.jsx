@@ -10,9 +10,9 @@ const Home = () => {
  
   const handleScroll = () => {
     if (window.scrollY > 200) {
-      setIsVisible(true); // Show the button if scrolled 200px down
+      setIsVisible(true);
     } else {
-      setIsVisible(false); // Hide the button otherwise
+      setIsVisible(false); 
     }
   };
 
@@ -20,7 +20,7 @@ const Home = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Smooth scrolling effect
+      behavior: "smooth",
     });
   };
 
@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Cleanup on unmount
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
