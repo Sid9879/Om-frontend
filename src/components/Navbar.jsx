@@ -229,7 +229,7 @@ const [products, setproducts] = useState(false);
         </div>
         
       )}
-     {searchValue.trim() !== "" && searchUser.length > 0 && (
+     {login === true && searchValue.trim() !== "" && searchUser.length > 0 && (
   <div className="absolute top-full left-0 mt-2 w-full bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
     {searchUser.map((product, i) => (
       <Link
