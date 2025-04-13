@@ -12,7 +12,7 @@ export default function Navbar() {
   const userStore = useSelector((state)=>state.user)
   let dispatch = useDispatch()
 
-  let login = userStore.token
+  let login = userStore.login
 
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -85,16 +85,36 @@ const [products, setproducts] = useState(false);
         </div>
 
         {/* Search Bar */}
-        <div className="hidden sm:flex   md:flex w-[300px] ">
-          <input
-            type="text"
-            value={searchValue}
-            onChange={handleSearchChange}
-            className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
-          />
-
-        </div>
-      
+        <li className='list-none'>
+  <div className="relative">
+    <input
+      type="text"
+      value={searchValue}
+      onChange={handleSearchChange}
+      placeholder="Search..."
+      className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
+    />
+    {login === true && searchValue.trim() !== "" && searchUser.length > 0 && (
+      <div className="absolute left-0 right-0 mt-2 bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
+        {searchUser.map((product, i) => (
+          <Link
+            key={i}
+            to="/productDetail"
+            state={product}
+            className="block px-4 py-2 text-black hover:bg-gray-100 cursor-pointer"
+            onClick={() => {
+              setSearchValue("");
+              setSearchUser([]);
+              setNavbarOpen(false); // optionally close menu on mobile
+            }}
+          >
+            {product.title}
+          </Link>
+        ))}
+      </div>
+    )}
+  </div>
+</li>    
        <li className='hidden lg:block'><Link to = ''>Home</Link></li>
        <li className='hidden lg:block'><Link to = '/about'>AboutUs</Link></li>
        <li onClick={productOpen} className='hidden lg:block cursor-pointer relative'>Products
@@ -115,7 +135,8 @@ const [products, setproducts] = useState(false);
        </li>
        <li className='hidden lg:block'><Link to = '/contact'>ContactUs</Link></li>
         {/* Cart */}
-        <Link to ='/viewcart' className='cursor-pointer'><sub>{useritems.length}</sub><FaOpencart size={25} /></Link>
+       { login === true ?<Link to ='/viewcart' className='cursor-pointer'><sub>{useritems.length}</sub><FaOpencart size={25} /></Link> :
+        <Link to ='/viewcart' className='cursor-pointer'><sub>0</sub><FaOpencart size={25} /></Link>}
 
         {/* Profile Section */}
         <div id="profile-menu" className="relative flex items-center space-x-4">
@@ -155,14 +176,22 @@ const [products, setproducts] = useState(false);
                     Settings
                   </Link>
                 </li>
-                <li>
+               { login === true ? <li>
                   <Link
                     to="#" onClick={()=>dispatch(logout())}
                     className="block px-4 py-2 hover:bg-gray-600 hover:text-blue-400"
                   >
                      Logout
                   </Link>
-                </li>
+                </li> :
+                <li>
+                  <Link
+                    to="#"
+                    className="block px-4 py-2 hover:bg-gray-600 hover:text-blue-400"
+                  >
+                     Login
+                  </Link>
+                </li>}
               </ul>
             </div>
           )}
@@ -216,21 +245,20 @@ const [products, setproducts] = useState(false);
             <li className='hover:text-green-300'><Link to ='/'>ContactUs</Link></li>
             
            
-            <li>
+            {/* <li>
               <div>
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
-                />
+                  className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white sm:hidden"/>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
         
       )}
-     {login === true && searchValue.trim() !== "" && searchUser.length > 0 && (
-  <div className="absolute top-full left-0 mt-2 w-full bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
+     {/* {login === true && searchValue.trim() !== "" && searchUser.length > 0 && (
+  <div className="absolute top-full left-0 mt-2 w-full bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50 sm:hidden">
     {searchUser.map((product, i) => (
       <Link
         key={i}
@@ -246,7 +274,7 @@ const [products, setproducts] = useState(false);
       </Link>
     ))}
   </div>
-)}
+)} */}
 
 
     </nav>

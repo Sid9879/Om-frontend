@@ -49,8 +49,6 @@ export default function ProductDetails() {
         </div>
         <span class="sr-only">Loading...</span>
     </div>
-    
-    
   }
 {/* <div className="text-center mt-10 text-lg font-medium text-gray-600">Loading...</div>; */}
   return (
