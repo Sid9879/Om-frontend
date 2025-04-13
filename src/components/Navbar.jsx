@@ -71,7 +71,7 @@ const [products, setproducts] = useState(false);
     try {
       const res = await axios.get(`https://om-backend.onrender.com/posts/search?q=${value}`);
       setSearchUser(res.data.products || []);
-      console.log(res.data)
+      // console.log(res.data)
     } catch (error) {
       console.error("Error fetching search results:", error);
     }
