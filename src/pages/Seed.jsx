@@ -145,7 +145,10 @@ if (!seedDetails) {
   
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {seedDetails.map((ele, index) => (
-        <div key={index} className="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl border border-red-500 h-[65vh]">
+        <div
+        key={index}
+        className="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl border border-red-500 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden"
+      >
           {ele.image.length > 1 ? (
               <Slider {...sliderSettings}>
                 {ele.image.map((obj, i) => (
