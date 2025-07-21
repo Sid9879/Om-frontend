@@ -20,7 +20,7 @@ export default function ProductDetails() {
       try {
         const res = await axios.get(`https://om-backend.onrender.com/posts/find/${userId}`);
         setDetails(res.data.post);
-        // console.log(res)
+    
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -60,7 +60,7 @@ export default function ProductDetails() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex flex-col lg:flex-row gap-8 bg-white shadow-md rounded-xl border border-red-500 p-4">
-        {/* Image Slider or Single Image */}
+       
         <div className="w-full lg:w-1/2">
           {Details.image?.length > 1 ? (
             <Slider {...sliderSettings}>
@@ -85,7 +85,6 @@ export default function ProductDetails() {
           )}
         </div>
 
-        {/* Product Details */}
         <div className="w-full lg:w-1/2 flex flex-col justify-between">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -103,7 +102,7 @@ export default function ProductDetails() {
             </p>
           </div>
 
-          {/* Optional buttons */}
+       
           <div className="mt-6 flex gap-4 items-center justify-center">
             {/* <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add to Cart</button> */}
             <Link to={'/'} className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">Back</Link>

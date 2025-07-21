@@ -102,7 +102,7 @@ const ViewDetails = () => {
             </div>
           </div>
         ) : (
-          <p>Loading details...</p> // Fallback if `cartDetails` is null
+          <p>Loading details...</p> 
         )}
       </div>
     </div>

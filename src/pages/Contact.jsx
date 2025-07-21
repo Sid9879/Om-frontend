@@ -3,9 +3,9 @@ import React from "react";
 const Contact = () => {
   
   const contactInfo = {
-    address: "Gorakhpur 273001, Uttar Pradesh, India",
-    phone: "+91 1234567890",
-    email: "support@omagro.com",
+    address: "Bargadawa Sumergarh Maharajganj, Uttar Pradesh, India 273306",
+    phone: "+91 9889079086",
+    email: "quickhirehub143@gmail.com",
   };
 
   return (
