@@ -5,6 +5,7 @@ import { logout } from '../store/UserSlice';
 import { FaOpencart } from "react-icons/fa";
 import "../App.css";
 import axios from 'axios';
+import logo from '../assets/logo.png'
 
 export default function Navbar() {
   const [searchUser, setSearchUser] = useState([]);
@@ -80,9 +81,20 @@ const [products, setproducts] = useState(false);
     <nav id="navbar" className="bg-gray-800 text-white shadow-md fixed w-full z-50 ">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo or Heading */}
-        <div className="text-2xl font-bold">
-          <Link to="/" className="hover:text-blue-400">Om Agro Center</Link>
-        </div>
+      <div className="text-2xl font-bold flex items-center gap-2">
+  <img
+    className="w-[30px] h-[30px] rounded-full block md:hidden"
+    src={logo}
+    alt="logo"
+  />
+  <Link
+    to="/"
+    className="hover:text-blue-400 hidden md:block"
+  >
+    Om Agro Center
+  </Link>
+</div>
+
 
         {/* Search Bar */}
         <li className='list-none'>
@@ -92,10 +104,10 @@ const [products, setproducts] = useState(false);
       value={searchValue}
       onChange={handleSearchChange}
       placeholder="Search..."
-      className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
+      className=" sm:w-24  md:w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
     />
     {login === true && searchValue.trim() !== "" && searchUser.length > 0 && (
-      <div className="absolute left-0 right-0 mt-2 bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
+      <div className="sm:w-24 lg:w-full absolute left-0 right-0 mt-2 bg-white shadow-md rounded-md max-h-48 overflow-y-auto z-50">
         {searchUser.map((product, i) => (
           <Link
             key={i}
