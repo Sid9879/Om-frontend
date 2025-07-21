@@ -6,7 +6,6 @@ import { FaCamera } from "react-icons/fa";
 
 const UserProfile = () => {
    const userStore = useSelector((state)=>state.user)
-   console.log(userStore)
    
    let login = userStore.login;
 

@@ -10,7 +10,7 @@ export const handleAddCart = async (obj, token) => {
     title: obj.title,
     price: obj.price,
     size: obj.size || '',
-    quantity: 1,
+    quantity: obj.quantity || 1,
     total: obj.price *obj.quantity,
   };
 
