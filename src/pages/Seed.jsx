@@ -13,23 +13,20 @@ const Seed = () => {
   const userStore = useSelector((state) => state.user);
   const [totalPage, settotalPage] = useState(0);
   const [page, setpage] = useState(1);
-  let limit = 2; // This 'limit' variable is declared but not explicitly used in the API call.
+  const [limit, setLimit] = useState(8); // Set a default limit here, e.g., 8 items per page
   const [seedDetails, setseed] = useState([]);
   const [loading, setloading] = useState(false);
 
   const getSeed = async () => {
     try {
       setloading(true);
-      // It's crucial that your backend supports pagination with 'page' and 'limit'
-      // If it does, uncomment the line below:
-      // let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
-      let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed`);
-
+      // *** IMPORTANT CHANGE HERE: Pass limit and page as query parameters ***
+      let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
+      
       let data = res.data;
 
       settotalPage(data.totalPage);
-      // Append new data for infinite scroll
-      setseed((prev) => [...prev, ...data.seeds]);
+      setseed((prev) => [...prev, ...data.seeds]); // Append new data for infinite scroll
       setloading(false);
     } catch (error) {
       console.error('Error fetching seeds:', error);
@@ -40,7 +37,7 @@ const Seed = () => {
 
   useEffect(() => {
     getSeed();
-  }, [page]); // Re-fetch data when 'page' changes for infinite scroll
+  }, [page, limit]); // Re-fetch data when 'page' or 'limit' changes
 
   const fetchMoreData = () => {
     if (page < totalPage) {
@@ -56,14 +53,13 @@ const Seed = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    // Custom dots styling for better visibility
     appendDots: dots => (
       <div
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.4)", // Semi-transparent black background for dots
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
           borderRadius: "8px",
           padding: "4px",
-          bottom: "10px", // Position dots slightly up from bottom
+          bottom: "10px",
           width: "auto",
           display: "inline-block",
           position: "absolute",
@@ -79,11 +75,11 @@ const Seed = () => {
         style={{
           width: "8px",
           height: "8px",
-          backgroundColor: "#fff", // White dots
+          backgroundColor: "#fff",
           borderRadius: "50%",
           display: "inline-block",
           margin: "0 2px",
-          border: "1px solid #ccc" // Subtle border for dots
+          border: "1px solid #ccc"
         }}
       ></div>
     )
@@ -95,7 +91,7 @@ const Seed = () => {
       price: obj.price,
       size: obj.size || '',
       quantity: 1,
-      total: obj.price * 1 // Corrected total calculation for single item
+      total: obj.price * 1
     };
 
     try {
@@ -108,28 +104,26 @@ const Seed = () => {
           },
         }
       );
-      if (res.data.success) { // Assuming your backend returns a success property
-        toast.success(`${obj.title} added to cart! 🌱`); // Success notification
+      if (res.data.success) {
+        toast.success(`${obj.title} added to cart! 🌱`);
       } else {
         toast.error("Failed to add to cart. Please try again.");
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
-      toast.error("An error occurred while adding to cart."); // Error notification
+      toast.error("An error occurred while adding to cart.");
     }
   };
 
-
-  // Initial loading skeleton for when no data is present
   if (loading && seedDetails.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 py-8"> {/* Soft gradient background for seeds */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-emerald-800 bg-emerald-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl">Seeds of Growth</h1> {/* Themed title */}
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 py-8">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-emerald-800 bg-emerald-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl">Seeds of Growth</h1>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, index) => ( // Render 8 skeleton cards
+            {[...Array(8)].map((_, index) => (
               <div key={index} className="relative flex flex-col bg-white shadow-xl rounded-xl border border-emerald-300 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden animate-pulse">
-                <div className="relative overflow-hidden bg-gray-200 rounded-t-xl h-96"></div> {/* Lighter gray for image placeholder */}
+                <div className="relative overflow-hidden bg-gray-200 rounded-t-xl h-96"></div>
                 <div className="p-4 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
                     <div className="h-4 bg-gray-200 rounded-full w-3/4"></div>
@@ -140,7 +134,7 @@ const Seed = () => {
                   <div className="h-3 bg-gray-200 rounded-full max-w-[70%]"></div>
                 </div>
                 <div className="p-4 pt-0 flex gap-2 bg-gray-50">
-                  <div className="block w-full py-2 h-10 bg-emerald-300 rounded-lg"></div> {/* Themed button placeholders */}
+                  <div className="block w-full py-2 h-10 bg-emerald-300 rounded-lg"></div>
                   <div className="block w-full py-2 h-10 bg-emerald-300 rounded-lg"></div>
                 </div>
               </div>
@@ -152,7 +146,7 @@ const Seed = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 py-8"> {/* Consistent main background */}
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 py-8">
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-emerald-800 bg-emerald-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl animate-fade-in-down">Seeds of Growth</h1>
@@ -163,8 +157,8 @@ const Seed = () => {
         hasMore={page < totalPage}
         loader={
           <div className="flex justify-center items-center py-6 text-emerald-700 font-semibold text-lg">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-4 border-emerald-500 mr-3"></div> {/* Emerald spinner */}
-            <p>Sprouting new seeds...</p> {/* Engaging loader message */}
+            <div className="animate-spin rounded-full h-10 w-10 border-b-4 border-emerald-500 mr-3"></div>
+            <p>Sprouting new seeds...</p>
           </div>
         }
         endMessage={
@@ -174,11 +168,11 @@ const Seed = () => {
         }
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"> {/* Increased gap */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {seedDetails.map((ele, index) => (
               <div
                 key={index}
-                className="relative flex flex-col bg-white shadow-xl rounded-xl border border-emerald-300 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-emerald-500" // Card hover effect
+                className="relative flex flex-col bg-white shadow-xl rounded-xl border border-emerald-300 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-emerald-500"
               >
                 {ele.image.length > 1 ? (
                   <Slider {...sliderSettings}>
@@ -187,7 +181,7 @@ const Seed = () => {
                         <img
                           src={obj.url}
                           alt={obj.name || 'Default Image'}
-                          className="object-cover w-full h-full transition-transform duration-300 hover:scale-105" // Image zoom on hover
+                          className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
                         />
                       </div>
                     ))}
@@ -201,10 +195,10 @@ const Seed = () => {
                     />
                   </div>
                 )}
-                <div className="p-4 bg-emerald-50 flex-grow"> {/* Light emerald background for details */}
+                <div className="p-4 bg-emerald-50 flex-grow">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-lg font-bold text-emerald-800">Title: {ele.title}</p> {/* Bold emerald title */}
-                    <p className="text-lg font-bold text-red-600">₹{ele.price}</p> {/* Red price for attention */}
+                    <p className="text-lg font-bold text-emerald-800">Title: {ele.title}</p>
+                    <p className="text-lg font-bold text-red-600">₹{ele.price}</p>
                   </div>
                   <p className="text-sm text-gray-700 mb-1">
                     **Description:** {ele.description?.slice(0, 100)}...
@@ -216,11 +210,11 @@ const Seed = () => {
                     **Category:** {ele?.category}
                   </p>
                 </div>
-                <div className="p-4 pt-0 flex gap-3 bg-emerald-50"> {/* Emerald background for buttons section */}
+                <div className="p-4 pt-0 flex gap-3 bg-emerald-50">
                   <Link
                     to="/viewcart"
                     onClick={() => handleAddCart(ele)}
-                    className="block w-full py-3 text-base font-semibold text-center text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg" // Emerald buttons
+                    className="block w-full py-3 text-base font-semibold text-center text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg"
                     type="button"
                   >
                     Add to Cart
@@ -228,7 +222,7 @@ const Seed = () => {
                   <Link
                     to="/viewdetails"
                     state={ele}
-                    className="block w-full py-3 text-base font-semibold text-center text-emerald-800 bg-emerald-200 rounded-lg hover:bg-emerald-300 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg" // Lighter emerald for view details
+                    className="block w-full py-3 text-base font-semibold text-center text-emerald-800 bg-emerald-200 rounded-lg hover:bg-emerald-300 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg"
                     type="button"
                   >
                     View Details

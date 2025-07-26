@@ -14,16 +14,14 @@ const Fertilizer = () => {
   const userStore = useSelector((state) => state.user);
   const [totalPage, settotalPage] = useState(0);
   const [page, setpage] = useState(1);
-  let limit = 2;
+  const [limit, setLimit] = useState(8); // Changed to useState and set a default limit
   const [loading, setloading] = useState(false);
   const [fertilizesDetails, setfertilizesDetails] = useState([]);
 
   const getfertilizers = async () => {
     try {
       setloading(true);
-      // Ensure your backend supports pagination if you intend to use 'page' and 'limit'
-      // Example: let res = await axios.get(`https://om-backend.onrender.com/posts/getfertilizers?page=${page}&limit=${limit}`);
-      let res = await axios.get('https://om-backend.onrender.com/posts/getfertilizers');
+      let res = await axios.get(`https://om-backend.onrender.com/posts/getfertilizers?limit=${limit}&page=${page}`);
       let data = res.data;
       settotalPage(data.totalPage);
       setfertilizesDetails((prevDetails) => [...prevDetails, ...data.fertilizers]);
@@ -37,7 +35,7 @@ const Fertilizer = () => {
 
   useEffect(() => {
     getfertilizers();
-  }, [page]);
+  }, [page, limit]); // Added 'limit' to the dependency array
 
   const fetchMoreData = () => {
     if (page < totalPage) {
@@ -69,7 +67,7 @@ const Fertilizer = () => {
         style={{
           width: "10px",
           height: "10px",
-          backgroundColor: "#fff", 
+          backgroundColor: "#fff",
           borderRadius: "50%",
           display: "inline-block",
           margin: "0 3px"
@@ -92,17 +90,16 @@ const Fertilizer = () => {
     }
   };
 
-  // Initial loading skeleton for when no data is present
   if (loading && fertilizesDetails.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-100 to-yellow-100 py-8"> {/* Soft gradient background */}
+      <div className="min-h-screen bg-gradient-to-br from-green-100 to-yellow-100 py-8">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-green-800 bg-green-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl">Fertilizers</h1>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[...Array(8)].map((_, index) => (
               <div key={index} className="relative flex flex-col text-gray-700 bg-white shadow-xl rounded-xl border border-green-300 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden animate-pulse">
-                <div className="relative overflow-hidden bg-gray-200 rounded-t-xl h-96 dark:bg-gray-700"></div> {/* Lighter gray for image placeholder */}
-                <div className="p-4 bg-gray-50"> {/* Slightly different background for text content */}
+                <div className="relative overflow-hidden bg-gray-200 rounded-t-xl h-96 dark:bg-gray-700"></div>
+                <div className="p-4 bg-gray-50">
                   <div className="flex items-center justify-between mb-2">
                     <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-3/4"></div>
                     <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-1/4"></div>
@@ -112,7 +109,7 @@ const Fertilizer = () => {
                   <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[70%]"></div>
                 </div>
                 <div className="p-4 pt-0 flex gap-2 bg-gray-50">
-                  <div className="block w-full py-2 h-10 bg-green-300 rounded-lg dark:bg-green-700"></div> {/* Green tint for button placeholders */}
+                  <div className="block w-full py-2 h-10 bg-green-300 rounded-lg dark:bg-green-700"></div>
                   <div className="block w-full py-2 h-10 bg-green-300 rounded-lg dark:bg-green-700"></div>
                 </div>
               </div>
@@ -124,10 +121,10 @@ const Fertilizer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50 py-8"> {/* Soft gradient background */}
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50 py-8">
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-green-800 bg-green-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl animate-fade-in-down">Fertilizers</h1> {/* Enhanced title */}
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-green-800 bg-green-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl animate-fade-in-down">Fertilizers</h1>
 
       <InfiniteScroll
         dataLength={fertilizesDetails.length}
@@ -135,7 +132,7 @@ const Fertilizer = () => {
         hasMore={page < totalPage}
         loader={
           <div className="flex justify-center items-center py-6 text-green-700 font-semibold text-lg">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-4 border-green-500 mr-3"></div> {/* Green spinner */}
+            <div className="animate-spin rounded-full h-10 w-10 border-b-4 border-green-500 mr-3"></div>
             <p>Loading more fertilizers...</p>
           </div>
         }
@@ -146,20 +143,20 @@ const Fertilizer = () => {
         }
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"> {/* Increased gap for better spacing */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {fertilizesDetails?.map((ele, index) => (
               <div
                 key={index}
-                className="relative flex flex-col bg-white shadow-xl rounded-xl border border-green-300 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-green-500" // Card hover effect, slightly increased scale
+                className="relative flex flex-col bg-white shadow-xl rounded-xl border border-green-300 h-[420px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-green-500"
               >
                 {ele.image.length > 1 ? (
                   <Slider {...sliderSettings}>
                     {ele.image.map((obj, i) => (
-                      <div key={i} className="relative overflow-hidden bg-gray-100 rounded-t-xl h-96"> {/* Lighter bg for image container */}
+                      <div key={i} className="relative overflow-hidden bg-gray-100 rounded-t-xl h-96">
                         <img
                           src={obj.url}
                           alt={obj.name || 'Default Image'}
-                          className="object-cover w-full h-full transition-transform duration-300 hover:scale-105" // Image zoom on hover
+                          className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
                         />
                       </div>
                     ))}
@@ -173,10 +170,10 @@ const Fertilizer = () => {
                     />
                   </div>
                 )}
-                <div className="p-4 bg-green-50 flex-grow"> {/* Light green background for details */}
+                <div className="p-4 bg-green-50 flex-grow">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-lg font-bold text-green-800">Title: {ele.title}</p> {/* Bold green title */}
-                    <p className="text-lg font-bold text-red-600">₹{ele.price}</p> {/* Red price for attention */}
+                    <p className="text-lg font-bold text-green-800">Title: {ele.title}</p>
+                    <p className="text-lg font-bold text-red-600">₹{ele.price}</p>
                   </div>
                   <p className="text-sm text-gray-700 mb-1">
                     **Description:** {ele.description?.slice(0, 100)}...
@@ -188,11 +185,11 @@ const Fertilizer = () => {
                     **Category:** {ele?.category}
                   </p>
                 </div>
-                <div className="p-4 pt-0 flex gap-3 bg-green-50"> {/* Green background for buttons section */}
+                <div className="p-4 pt-0 flex gap-3 bg-green-50">
                   <Link
                     to="/viewcart"
                     onClick={() => handleAddToCartClick(ele)}
-                    className="block w-full py-3 text-base font-semibold text-center text-white bg-green-600 rounded-lg hover:bg-green-700 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg" // Green buttons
+                    className="block w-full py-3 text-base font-semibold text-center text-white bg-green-600 rounded-lg hover:bg-green-700 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg"
                     type="button"
                   >
                     Add to Cart
@@ -200,7 +197,7 @@ const Fertilizer = () => {
                   <Link
                     to="/viewdetails"
                     state={ele}
-                    className="block w-full py-3 text-base font-semibold text-center text-green-800 bg-green-200 rounded-lg hover:bg-green-300 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg" // Lighter green for view details
+                    className="block w-full py-3 text-base font-semibold text-center text-green-800 bg-green-200 rounded-lg hover:bg-green-300 transition duration-300 transform hover:scale-105 active:scale-100 shadow-md hover:shadow-lg"
                     type="button"
                   >
                     View Details
