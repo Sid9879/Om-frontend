@@ -6,42 +6,40 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify'; // Import for toast notifications
-import 'react-toastify/dist/ReactToastify.css'; // Toastify CSS
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Seed = () => {
   const userStore = useSelector((state) => state.user);
   const [totalPage, settotalPage] = useState(0);
   const [page, setpage] = useState(1);
-  const [limit, setLimit] = useState(8); // Set a default limit here, e.g., 8 items per page
+  const [limit, setLimit] = useState(8);
   const [seedDetails, setseed] = useState([]);
   const [loading, setloading] = useState(false);
 
   const getSeed = async () => {
     try {
       setloading(true);
-      // *** IMPORTANT CHANGE HERE: Pass limit and page as query parameters ***
       let res = await axios.get(`https://om-backend.onrender.com/posts/getSeed?limit=${limit}&page=${page}`);
       
       let data = res.data;
 
       settotalPage(data.totalPage);
-      setseed((prev) => [...prev, ...data.seeds]); // Append new data for infinite scroll
+      setseed((prev) => [...prev, ...data.seeds]); 
       setloading(false);
     } catch (error) {
       console.error('Error fetching seeds:', error);
-      setloading(false); // Ensure loading is set to false even on error
-      toast.error('Failed to load seeds. Please try again.'); // User feedback for API errors
+      setloading(false); 
+      toast.error('Failed to load seeds. Please try again.');
     }
   };
 
   useEffect(() => {
     getSeed();
-  }, [page, limit]); // Re-fetch data when 'page' or 'limit' changes
-
+  }, [page, limit]);
   const fetchMoreData = () => {
     if (page < totalPage) {
-      setpage(page + 1); // Increment page to fetch next set of data
+      setpage(page + 1); 
     }
   };
 
