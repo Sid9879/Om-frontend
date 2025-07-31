@@ -1,4 +1,3 @@
-// src/PrivacyPolicyPage.js
 import React from 'react';
 import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
 
