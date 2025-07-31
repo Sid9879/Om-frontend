@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
 import { motion } from 'framer-motion';
-import Footer from './Footer';
 
 const Home = () => {
   const userStore = useSelector((state) => state.user);
@@ -197,7 +196,6 @@ const Home = () => {
           </div>
         </section>
 
-             <Footer/>
 
       </div>
       {isVisible && (

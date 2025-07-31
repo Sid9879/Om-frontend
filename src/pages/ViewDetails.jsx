@@ -5,7 +5,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { handleAddCart } from '../utils/CartUtils';
 import { useSelector } from 'react-redux';
-import Footer from './Footer';
 
 const ViewDetails = () => {
   const navigate = useNavigate();
@@ -174,7 +173,6 @@ const ViewDetails = () => {
           </div>
         </div>
       </div>
-      <Footer/>
 
     </div>
   );

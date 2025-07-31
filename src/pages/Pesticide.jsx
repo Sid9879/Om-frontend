@@ -9,7 +9,6 @@ import { handleAddCart } from '../utils/CartUtils';
 import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from './Footer';
 
 const Pesticide = () => {
   const userStore = useSelector((state) => state.user);
@@ -131,8 +130,7 @@ const Pesticide = () => {
   }
 
   return (
-    <>
-  <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 py-8">
+     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 py-8">
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10 text-indigo-800 bg-indigo-200 py-5 rounded-xl shadow-lg mx-auto max-w-2xl animate-fade-in-down">Pesticides & Insecticides</h1>
@@ -220,8 +218,6 @@ const Pesticide = () => {
         </div>
       </InfiniteScroll>
     </div>
-      <Footer/>
-    </>
   
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "./Footer";
 
 const Contact = () => {
   
@@ -36,7 +35,6 @@ const Contact = () => {
         </div>
       </div>
     </div>
-      <Footer/>
  </div>
   );
 };

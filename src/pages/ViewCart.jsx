@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Footer from "./Footer";
 
 const ViewCart = () => {
   const userStore = useSelector((state) => state.user);
@@ -518,7 +517,6 @@ const ViewCart = () => {
           )}
         </div>
       </section>
-      <Footer/>
 
     </div>
   );
