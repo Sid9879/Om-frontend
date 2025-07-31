@@ -6,9 +6,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
-import { Button, Modal } from 'antd'; // Assuming Ant Design is installed
-import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer for notifications
-import 'react-toastify/dist/ReactToastify.css'; // Toastify CSS
+import { Button, Modal } from 'antd'; 
+import { toast, ToastContainer } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const GetallPost = () => {
   const userStore = useSelector((state) => state.user);

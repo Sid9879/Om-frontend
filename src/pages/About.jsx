@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 
 const About = () => {
   return (
@@ -32,9 +33,7 @@ const About = () => {
           </li>
         </ul>
       </section>
-      <footer className='footer '>
-        <p className='pt-4'> 2023 Om Agro Center. All rights reserved.</p>
-      </footer>
+      <Footer/>
     </div>
   );
 };

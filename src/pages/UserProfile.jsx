@@ -2,6 +2,7 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { FaCamera } from "react-icons/fa";
+import Footer from './Footer';
 
 
 const UserProfile = () => {
@@ -751,11 +752,7 @@ const UserProfile = () => {
     </div>
   </div>
 </section>
-
-
-
-
-
+      <Footer/>
 
     </div>
   )

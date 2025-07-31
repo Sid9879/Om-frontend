@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import{useDispatch} from'react-redux';
 import { setState } from '../store/UserSlice';
 import {useNavigate} from 'react-router-dom'
+import Footer from './Footer';
 
 
 export default function Login() {
@@ -127,6 +128,8 @@ try {
         </div>
       </div>
     </div>
+      <Footer/>
+
    </div>
   );
 }

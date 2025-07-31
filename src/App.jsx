@@ -54,7 +54,6 @@ function App() {
       <Route path='/'  element={login===true? <Home/>:<Navigate to ='/login'/>}/>
       <Route path='/login'  element={login===false? <Login/> : <Navigate to ='/'/>}/>
       <Route path='/userProfile'  element={login===true?<UserProfile/> : <Navigate to ='/login'/>}/>
-
       <Route path='/createPost'  element={isAdmin===true?<CreatePost/>:<Navigate to ='/'/>}/>
       <Route path='/pesticide'  element={login===true?<Pesticide/> : <Navigate to ='/login'/>}/>
       <Route path='/fertilizer'  element={login===true?<Fertilizer/> : <Navigate to ='/login'/>}/>
@@ -66,7 +65,8 @@ function App() {
       <Route path='/about'  element={login===true?<About/> : <Navigate to ='/login'/>}/>
       <Route path='/location'  element={<LiveLocation/>}/>
       <Route path='/*' element={login===true?<PageNotFound/> : <Navigate to ='/login'/>}/>
-      <Route path='/productDetail'  element={login===true?<ProductDetails/> : <Navigate to ='/login'/>}/>
+      <Route path='/productDetail/:id'  element={login===true?<ProductDetails/> : <Navigate to ='/login'/>}/>
+
 
 
 

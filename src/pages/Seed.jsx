@@ -8,6 +8,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
+import Footer from './Footer';
 
 const Seed = () => {
   const userStore = useSelector((state) => state.user);
@@ -144,6 +145,7 @@ const Seed = () => {
   }
 
   return (
+  <>
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 py-8">
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
@@ -231,7 +233,11 @@ const Seed = () => {
           </div>
         </div>
       </InfiniteScroll>
+    
+
     </div>
+    <Footer />
+  </>
   );
 };
 

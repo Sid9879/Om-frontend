@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import Footer from "./Footer";
 
 const ViewCart = () => {
   const userStore = useSelector((state) => state.user);
@@ -29,6 +30,7 @@ const ViewCart = () => {
           },
         }
       );
+      console.log(res.data)
       const data = res.data;
 
       setuseritems(Array.isArray(data.cartItem) ? data.cartItem : []);
@@ -275,7 +277,7 @@ const ViewCart = () => {
                       >
                         <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                           <Link
-                            to={`/product/${obj.productId?._id}`}
+                            to={`/productDetail/${obj.productId?._id}`}
                             className="shrink-0 md:order-1 group"
                           >
                             <img
@@ -351,7 +353,8 @@ const ViewCart = () => {
                           </div>
                           <div className="w-full min-w-0 flex-1 space-y-2 md:order-2 md:max-w-md">
                             <Link
-                              to={`/product/${obj.productId?._id}`}
+                          to={`/productDetail/${obj.productId?._id}`}
+
                               className="text-lg font-semibold text-gray-900 hover:underline dark:text-white"
                             >
                               {obj.title}
@@ -515,6 +518,8 @@ const ViewCart = () => {
           )}
         </div>
       </section>
+      <Footer/>
+
     </div>
   );
 };

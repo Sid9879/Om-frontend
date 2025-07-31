@@ -13,7 +13,6 @@ export const UserSlice = createSlice({
   initialState:initialState,
   reducers: {
    setState:(state,action)=>{
-    console.log(action.payload)
 localStorage.setItem('OmAgroCenter',JSON.stringify({login:true,token:action.payload.token,user:""}))
 state.login=true;
 state.token=action.payload.token;

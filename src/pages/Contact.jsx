@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 
 const Contact = () => {
   
@@ -9,7 +10,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+ <div>
+     <div className="max-h-screen flex items-center justify-center bg-gray-100 p-6">
       <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Contact Us
@@ -34,6 +36,8 @@ const Contact = () => {
         </div>
       </div>
     </div>
+      <Footer/>
+ </div>
   );
 };
 

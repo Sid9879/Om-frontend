@@ -86,7 +86,7 @@ export default function Navbar() {
 
   return (
     <nav id="navbar" className="bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl fixed w-full z-50 transition-all duration-300 ease-in-out">
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
+      <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <div className="text-2xl font-bold flex items-center gap-2">
           <img
             className="w-[35px] h-[35px] rounded-full sm:w-[40px] sm:h-[40px] mr-2 transform hover:scale-110 transition-transform duration-300"
