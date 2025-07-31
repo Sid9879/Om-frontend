@@ -172,9 +172,7 @@ const Home = () => {
                   className='bg-white rounded-3xl shadow-xl p-8 cursor-pointer border border-gray-100 flex flex-col items-center'
                   variants={categoryCardVariants}
                   whileHover='hover'
-                  onClick={() => {
-                    alert(`Navigating to ${category.name} products page!`);
-                  }}
+                 
                 >
                   <motion.img
                     src={category.imageUrl}
