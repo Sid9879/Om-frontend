@@ -23,6 +23,7 @@ import LiveLocation from './pages/LiveLocation';
 import PageNotFound from './pages/PageNotFound';
 import ProductDetails from './components/ProductDetails';
 import Footer from './pages/Footer';
+import Allpost from './pages/Allpost';
 
 function App() {
   let dispatch = useDispatch();
@@ -75,6 +76,7 @@ function App() {
               <Route path='/location' element={<LiveLocation />} />
               <Route path='/*' element={login === true ? <PageNotFound /> : <Navigate to='/login' />} />
               <Route path='/productDetail/:id' element={login === true ? <ProductDetails /> : <Navigate to='/login' />} />
+              <Route path='/products' element={login === true ? <Allpost/> : <Navigate to='/login' />} />
             </Routes>
           </main>
           <Footer />

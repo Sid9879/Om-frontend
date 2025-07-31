@@ -126,7 +126,7 @@ const Home = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Link
-              to='/'
+              to='/products'
               className='bg-white text-green-800 px-8 py-3 md:px-14 md:py-5 rounded-full text-lg md:text-2xl font-bold hover:bg-gray-100 transition duration-300 transform inline-block shadow-xl'
             >
               Shop Now <i className='fas fa-arrow-right ml-2 md:ml-3'></i>
