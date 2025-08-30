@@ -22,7 +22,7 @@ const Home = () => {
       link: '/seed',
     },
     {
-      name: 'Pesticides',
+      name: 'Insecticides & Pesticides',
       description: 'Effective and safe solutions to protect your crops from pests and diseases.',
       imageUrl: pesticides,
       link: '/pesticide',
